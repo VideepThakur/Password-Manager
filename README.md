@@ -1,43 +1,89 @@
-# Password Manager Application
+# 🔐 Password Manager Application (Java + Swing)
 
-A simple Java-based Password Manager application with a graphical user interface built using `Swing`. This application allows you to securely store website credentials (website, username, and encrypted password) and retrieve them as needed. Additionally, the application is protected by a master password, which must be entered at startup to access stored credentials.
+A secure and modern Java-based Password Manager with GUI built using **Swing**. This application allows you to securely store website credentials (website, username, and encrypted password) protected by AES encryption and a master password.
 
-## Features
+---
 
-- **Secure Master Password**: The application requires a master password to be entered at startup, which is validated against a stored SHA-256 hash. This ensures only authorized users can access or modify saved passwords.
-- **Add New Entries**: Store website credentials with an encrypted password.
-- **Retrieve Stored Entries**: Easily retrieve stored usernames and encrypted passwords for websites.
-- **Delete Entries**: Remove entries as needed.
-- **Persistent Storage**: Entries are saved to a file (`passwords.dat`) and loaded upon startup.
+## ✨ Features
 
-## How It Works
+- ✅ **Master Password Setup**
+  - On first launch, prompts to **set a master password**.
+  - On subsequent launches, the user must enter the correct master password (verified via SHA-256 hash).
 
-1. **Master Password Protection**:
-   - On startup, the application prompts the user to enter the master password.
-   - If the entered password matches the stored SHA-256 hash of the master password, the user is granted access.
-   - If the entered password is incorrect, the application exits.
+- 🔐 **AES Encryption**
+  - All passwords are encrypted with AES using a key derived from the master password via PBKDF2.
+  - The full password storage (`passwords.dat`) is encrypted and serialized securely.
 
-2. **Managing Entries**:
-   - Users can add, retrieve, and delete entries from the interface.
-   - Each entry consists of a website, username, and encrypted password.
-   - The `passwords.dat` file is used to save and load entries, ensuring persistence between sessions.
+- 💾 **Persistent Encrypted Storage**
+  - Stores all entries (website, username, encrypted password) in `passwords.dat` (AES encrypted).
+  - Master password hash is stored in `config.dat`.
 
-## Getting Started
+- ➕ **Manage Credentials**
+  - Add, retrieve, and delete website credentials via the GUI.
 
-### Prerequisites
+- 📤 **Export Options**
+  - Export all passwords (decrypted) to:
+    - `export.json` (pretty printed)
+    - `export.csv` (comma-separated values)
 
-- **Java Development Kit (JDK)**: Make sure JDK 8 or higher is installed on your system.
-- **IDE** (Optional): While not required, using an IDE such as IntelliJ IDEA or Eclipse can simplify running and modifying the project.
+- 📦 **Portable .exe Support**
+  - The ready-to-use Windows `.exe` (`app.exe`) is available in the **`App/`** folder for one-click launch.
 
-### Installing
+---
 
-1. Clone or download the project files.
-2. Place the files in a single directory, such as `PasswordManager`.
-3. Compile and run the project in your preferred Java environment.
+## 🛠️ Getting Started (for Developers)
 
-### Running the Application
+### ✅ Prerequisites
 
-1. **Compile and Run**: Use your IDE or the following command in a terminal to compile and run:
-   ```bash
-   javac PasswordManagerApp.java
-   java PasswordManagerApp
+- **Java 11 or later** (JDK)
+- **[Gson Library](https://repo1.maven.org/maven2/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar)**  
+  *(Used for JSON export)*
+
+### 📁 Folder Structure
+
+```
+Root/
+├── App/
+│   └── app.exe              <-- Executable launcher (Windows)
+├── System/
+│   ├── PasswordManagerApp.java
+│   └── gson-2.10.1.jar
+```
+
+### 📥 Installing & Building
+
+1. Navigate to the `System` folder.
+
+2. **Compile**:
+
+```bash
+javac -cp gson-2.10.1.jar PasswordManagerApp.java
+```
+
+3. **Run**:
+
+```bash
+java -cp .;gson-2.10.1.jar PasswordManagerApp
+```
+
+> Note: On macOS/Linux, replace `;` with `:` in the classpath:
+```bash
+java -cp .:gson-2.10.1.jar PasswordManagerApp
+```
+
+---
+
+## 🔐 Data Files
+
+| File Name        | Purpose                                             |
+|------------------|-----------------------------------------------------|
+| `passwords.dat`  | Stores all encrypted credentials (AES)              |
+| `config.dat`     | Stores SHA-256 hash of the master password          |
+| `export.json`    | (Optional) JSON export of decrypted credentials     |
+| `export.csv`     | (Optional) CSV export of decrypted credentials      |
+
+---
+
+## 📄 License
+
+This is a personal project intended for educational and secure local use. Do not use it for storing sensitive information in production environments without additional security enhancements.
