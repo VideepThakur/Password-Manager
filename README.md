@@ -1,3 +1,5 @@
+
+````markdown
 # 🔐 Password Manager Application (Java + Swing)
 
 A secure and modern Java-based Password Manager with GUI built using **Swing**. This application allows you to securely store website credentials (website, username, and encrypted password) protected by AES encryption and a master password.
@@ -26,12 +28,9 @@ A secure and modern Java-based Password Manager with GUI built using **Swing**. 
     - `export.json` (pretty printed)
     - `export.csv` (comma-separated values)
 
-- 📦 **Portable .exe Support**
-  - The ready-to-use Windows `.exe` (`app.exe`) is available in the **`App/`** folder for one-click launch.
-
 ---
 
-## 🛠️ Getting Started (for Developers)
+## 🛠️ Getting Started
 
 ### ✅ Prerequisites
 
@@ -39,34 +38,34 @@ A secure and modern Java-based Password Manager with GUI built using **Swing**. 
 - **[Gson Library](https://repo1.maven.org/maven2/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar)**  
   *(Used for JSON export)*
 
-### 📁 Folder Structure
+### 📥 Installing
 
-```
-Root/
-├── App/
-│   └── app.exe              <-- Executable launcher (Windows)
-├── System/
-│   ├── PasswordManagerApp.java
-│   └── gson-2.10.1.jar
-```
+1. **Download or clone** the repository.
 
-### 📥 Installing & Building
+2. **Download gson**:
+   - Direct link:  
+     [gson-2.10.1.jar](https://repo1.maven.org/maven2/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar)
+   - Save it in the `System` folder (same location as `PasswordManagerApp.java`).
 
-1. Navigate to the `System` folder.
+---
 
-2. **Compile**:
+## 🚀 Running the Application
+
+### 📌 Compile
 
 ```bash
+cd System
 javac -cp gson-2.10.1.jar PasswordManagerApp.java
-```
+````
 
-3. **Run**:
+### ▶️ Run
 
 ```bash
 java -cp .;gson-2.10.1.jar PasswordManagerApp
 ```
 
-> Note: On macOS/Linux, replace `;` with `:` in the classpath:
+> Note: Use `:` instead of `;` on macOS/Linux:
+
 ```bash
 java -cp .:gson-2.10.1.jar PasswordManagerApp
 ```
@@ -75,15 +74,17 @@ java -cp .:gson-2.10.1.jar PasswordManagerApp
 
 ## 🔐 Data Files
 
-| File Name        | Purpose                                             |
-|------------------|-----------------------------------------------------|
-| `passwords.dat`  | Stores all encrypted credentials (AES)              |
-| `config.dat`     | Stores SHA-256 hash of the master password          |
-| `export.json`    | (Optional) JSON export of decrypted credentials     |
-| `export.csv`     | (Optional) CSV export of decrypted credentials      |
+| File Name       | Purpose                                         |
+| --------------- | ----------------------------------------------- |
+| `passwords.dat` | Stores all encrypted credentials (AES)          |
+| `config.dat`    | Stores SHA-256 hash of the master password      |
+| `export.json`   | (Optional) JSON export of decrypted credentials |
+| `export.csv`    | (Optional) CSV export of decrypted credentials  |
 
 ---
 
 ## 📄 License
 
 This is a personal project intended for educational and secure local use. Do not use it for storing sensitive information in production environments without additional security enhancements.
+
+
