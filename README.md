@@ -1,90 +1,77 @@
-
-````markdown
 # 🔐 Password Manager Application (Java + Swing)
 
-A secure and modern Java-based Password Manager with GUI built using **Swing**. This application allows you to securely store website credentials (website, username, and encrypted password) protected by AES encryption and a master password.
-
----
+A secure Java-based password manager with Swing GUI featuring AES encryption and master password protection.
 
 ## ✨ Features
 
-- ✅ **Master Password Setup**
-  - On first launch, prompts to **set a master password**.
-  - On subsequent launches, the user must enter the correct master password (verified via SHA-256 hash).
+### 🔒 Security
+- **Master Password System**
+  - First-run setup with SHA-256 hash verification
+  - PBKDF2 key derivation for encryption
+- **AES-256 Encryption**
+  - Encrypts all stored credentials
+  - Encrypts the entire password database file
 
-- 🔐 **AES Encryption**
-  - All passwords are encrypted with AES using a key derived from the master password via PBKDF2.
-  - The full password storage (`passwords.dat`) is encrypted and serialized securely.
+### 💻 Functionality
+- **Credential Management**
+  - Add new website credentials
+  - View stored credentials (decrypted on-demand)
+  - Delete existing entries
+- **Data Export**
+  - JSON export (`export.json`)
+  - CSV export (`export.csv`)
 
-- 💾 **Persistent Encrypted Storage**
-  - Stores all entries (website, username, encrypted password) in `passwords.dat` (AES encrypted).
-  - Master password hash is stored in `config.dat`.
+### 📁 Data Storage
+| File            | Format          | Contents                          |
+|-----------------|-----------------|-----------------------------------|
+| `passwords.dat` | AES-encrypted   | All user credentials              |
+| `config.dat`    | Plaintext hash  | SHA-256 of master password        |
 
-- ➕ **Manage Credentials**
-  - Add, retrieve, and delete website credentials via the GUI.
+## 🛠️ Installation
 
-- 📤 **Export Options**
-  - Export all passwords (decrypted) to:
-    - `export.json` (pretty printed)
-    - `export.csv` (comma-separated values)
+### Requirements
+- Java JDK 11+
+- [Gson 2.10.1](https://repo1.maven.org/maven2/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar)
 
----
+### Setup
+1. Download the application files
+2. Place `gson-2.10.1.jar` in the `System` folder
+3. Compile with:
+   ```bash
+   javac -cp gson-2.10.1.jar PasswordManagerApp.java
+   ```
 
-## 🛠️ Getting Started
+## 🚀 Usage
 
-### ✅ Prerequisites
-
-- **Java 11 or later** (JDK)
-- **[Gson Library](https://repo1.maven.org/maven2/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar)**  
-  *(Used for JSON export)*
-
-### 📥 Installing
-
-1. **Download or clone** the repository.
-
-2. **Download gson**:
-   - Direct link:  
-     [gson-2.10.1.jar](https://repo1.maven.org/maven2/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar)
-   - Save it in the `System` folder (same location as `PasswordManagerApp.java`).
-
----
-
-## 🚀 Running the Application
-
-### 📌 Compile
-
+### Launching
 ```bash
-cd System
-javac -cp gson-2.10.1.jar PasswordManagerApp.java
-````
-
-### ▶️ Run
-
-```bash
+# Windows:
 java -cp .;gson-2.10.1.jar PasswordManagerApp
-```
 
-> Note: Use `:` instead of `;` on macOS/Linux:
-
-```bash
+# Mac/Linux:
 java -cp .:gson-2.10.1.jar PasswordManagerApp
 ```
 
+### First Run
+1. Set your master password
+2. The system will create:
+   - `config.dat` (password hash)
+   - `passwords.dat` (empty encrypted database)
+
+### Normal Operation
+1. Enter master password to unlock
+2. Use the GUI to:
+   - Add credentials (auto-encrypts)
+   - View credentials (decrypts temporarily)
+   - Delete entries
+   - Export data
+
+## ⚠️ Security Notes
+- The master password cannot be recovered
+- Always keep backups of `passwords.dat`
+- For production use, implement additional security measures
+
+## 📜 License
+Educational use only. Not recommended for sensitive production environments.
+
 ---
-
-## 🔐 Data Files
-
-| File Name       | Purpose                                         |
-| --------------- | ----------------------------------------------- |
-| `passwords.dat` | Stores all encrypted credentials (AES)          |
-| `config.dat`    | Stores SHA-256 hash of the master password      |
-| `export.json`   | (Optional) JSON export of decrypted credentials |
-| `export.csv`    | (Optional) CSV export of decrypted credentials  |
-
----
-
-## 📄 License
-
-This is a personal project intended for educational and secure local use. Do not use it for storing sensitive information in production environments without additional security enhancements.
-
-
