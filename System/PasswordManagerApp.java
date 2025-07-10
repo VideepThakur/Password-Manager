@@ -96,16 +96,17 @@ public class PasswordManagerApp {
 
             JFrame frame = new JFrame("Password Manager");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(500, 400);
+            frame.setSize(500, 450);
             frame.setLayout(new BorderLayout());
 
             websiteList = new JList<>(websiteListModel);
             JScrollPane scrollPane = new JScrollPane(websiteList);
 
-            JPanel inputPanel = new JPanel(new GridLayout(3, 2));
+            JPanel inputPanel = new JPanel(new GridLayout(4, 2));
             JTextField websiteField = new JTextField();
             JTextField usernameField = new JTextField();
             JPasswordField passwordField = new JPasswordField();
+            JCheckBox showPasswordCheck = new JCheckBox("Show Password");
 
             inputPanel.add(new JLabel("Website:"));
             inputPanel.add(websiteField);
@@ -113,6 +114,16 @@ public class PasswordManagerApp {
             inputPanel.add(usernameField);
             inputPanel.add(new JLabel("Password:"));
             inputPanel.add(passwordField);
+            inputPanel.add(new JLabel("")); // empty space
+            inputPanel.add(showPasswordCheck);
+
+            showPasswordCheck.addActionListener(e -> {
+                if (showPasswordCheck.isSelected()) {
+                    passwordField.setEchoChar((char) 0); // show characters
+                } else {
+                    passwordField.setEchoChar('*'); // mask characters
+                }
+            });
 
             JButton addButton = new JButton("Add");
             JButton getButton = new JButton("Get");
